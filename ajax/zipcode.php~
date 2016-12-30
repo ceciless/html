@@ -1,0 +1,13 @@
+<?php
+
+if(isset($_POST['zipcode'])=== true && empty($_POST['zipcode'])=== false){
+	require '../db/connect.php';
+	$query = mysql_query("
+		SELECT 'zipcodetable'.'Libelle_acheminement'
+		FROM   'zipcodetable'
+		WHERE 'zipcodetable'. 'Code_postal' = '".mysql_real_espace_string(trim($_POST['Code_postal']))."'
+		");
+
+	echo (mysql_num_rows($query)!==0)? mysql_result($query, 0, 'Libelle_acheminement') : 'zip code not found';
+
+}
